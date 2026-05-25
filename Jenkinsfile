@@ -1,22 +1,11 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "flask-app"
-        TAG = "latest"
-    }
-
     stages {
-
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/amanyadav08/Flask-app.git'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$TAG .'
+                sh 'docker build -t flask-app .'
             }
         }
 
@@ -29,7 +18,7 @@ pipeline {
                 docker run -d \
                 --name flask-container \
                 -p 5000:5000 \
-                flask-app:latest
+                flask-app
                 '''
             }
         }
