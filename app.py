@@ -1,10 +1,155 @@
-from flask import Flask
+from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
+HTML_PAGE = """
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps CI/CD Pipeline</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background: linear-gradient(135deg,#0f172a,#1e293b,#0f766e);
+            color:white;
+            min-height:100vh;
+        }
+
+        .container{
+            width:90%;
+            margin:auto;
+            padding-top:60px;
+            text-align:center;
+        }
+
+        h1{
+            font-size:60px;
+            margin-bottom:20px;
+            color:#38bdf8;
+        }
+
+        p{
+            font-size:22px;
+            color:#e2e8f0;
+            margin-bottom:30px;
+        }
+
+        .cards{
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+            gap:25px;
+            margin-top:50px;
+        }
+
+        .card{
+            background:rgba(255,255,255,0.1);
+            backdrop-filter:blur(10px);
+            padding:30px;
+            border-radius:20px;
+            width:250px;
+            transition:0.3s;
+            box-shadow:0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .card:hover{
+            transform:translateY(-10px);
+            background:rgba(255,255,255,0.2);
+        }
+
+        .card h2{
+            margin-bottom:15px;
+            color:#22d3ee;
+        }
+
+        .footer{
+            margin-top:70px;
+            padding:20px;
+            color:#cbd5e1;
+            font-size:18px;
+        }
+
+        .btn{
+            display:inline-block;
+            margin-top:20px;
+            padding:14px 30px;
+            background:#06b6d4;
+            color:white;
+            text-decoration:none;
+            border-radius:10px;
+            font-size:18px;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            background:#0891b2;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>🚀 DevOps CI/CD Pipeline</h1>
+
+        <p>
+            Flask Application Successfully Deployed using
+            GitHub + Jenkins + Docker + AWS
+        </p>
+
+        <a href="#" class="btn">Deployment Successful</a>
+
+        <div class="cards">
+
+            <div class="card">
+                <h2>GitHub</h2>
+                <p>Source Code Management and Webhook Trigger</p>
+            </div>
+
+            <div class="card">
+                <h2>Jenkins</h2>
+                <p>Automated CI/CD Pipeline Execution</p>
+            </div>
+
+            <div class="card">
+                <h2>Docker</h2>
+                <p>Containerized Flask Application Deployment</p>
+            </div>
+
+            <div class="card">
+                <h2>AWS EC2</h2>
+                <p>Cloud Infrastructure Hosting Environment</p>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            Built by Aman 🚀 | DevOps Engineer
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+"""
+
 @app.route('/')
 def home():
-    return "Flask App Deployed Successfully!"
+    return render_template_string(HTML_PAGE)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
