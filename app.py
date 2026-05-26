@@ -2,7 +2,7 @@ from flask import Flask, render_template_string
 
 app = Flask(__name__)
 
-HTML_PAGE = """
+html = """
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +10,9 @@ HTML_PAGE = """
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pathnex - DevOps Training & Placement Center</title>
+<title>Pathnex | DevOps Training & Placement Center</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 
@@ -21,41 +21,57 @@ HTML_PAGE = """
     padding:0;
     box-sizing:border-box;
     font-family:'Poppins',sans-serif;
+    scroll-behavior:smooth;
 }
 
 body{
-    background:#0f172a;
+    background:#020617;
     color:white;
+    overflow-x:hidden;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#06b6d4;
+    border-radius:20px;
 }
 
 /* Navbar */
 
 nav{
+    width:100%;
     display:flex;
     justify-content:space-between;
     align-items:center;
     padding:25px 8%;
-    background:rgba(15,23,42,0.95);
-    position:sticky;
+    position:fixed;
     top:0;
     z-index:1000;
+    background:rgba(2,6,23,0.85);
+    backdrop-filter:blur(10px);
 }
 
 .logo{
-    font-size:32px;
-    font-weight:700;
+    font-size:38px;
+    font-weight:800;
     color:#38bdf8;
 }
 
 nav ul{
     display:flex;
+    gap:35px;
     list-style:none;
-    gap:30px;
 }
 
 nav ul li a{
     color:white;
     text-decoration:none;
+    font-size:18px;
     transition:0.3s;
 }
 
@@ -66,79 +82,136 @@ nav ul li a:hover{
 /* Hero Section */
 
 .hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
+    height:100vh;
     background:
-    linear-gradient(rgba(15,23,42,0.8),rgba(15,23,42,0.9)),
+    linear-gradient(rgba(2,6,23,0.75),rgba(2,6,23,0.9)),
     url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') center/cover;
-    padding:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+    position:relative;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#06b6d4;
+    filter:blur(180px);
+    opacity:0.25;
+    animation:float 6s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform:translateY(0px);}
+    50%{transform:translateY(-30px);}
+    100%{transform:translateY(0px);}
 }
 
 .hero-content{
-    max-width:900px;
+    max-width:1000px;
+    z-index:10;
 }
 
 .hero h1{
-    font-size:70px;
-    margin-bottom:20px;
-    color:#38bdf8;
+    font-size:85px;
+    font-weight:800;
+    line-height:1.2;
+    margin-bottom:25px;
+    background:linear-gradient(to right,#38bdf8,#22d3ee,#67e8f9);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:fadeIn 2s ease;
 }
 
 .hero p{
-    font-size:24px;
-    line-height:1.7;
-    color:#e2e8f0;
-    margin-bottom:40px;
+    font-size:25px;
+    line-height:1.8;
+    color:#cbd5e1;
+    margin-bottom:45px;
+    animation:fadeIn 3s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0px);
+    }
 }
 
 .btn{
-    display:inline-block;
-    padding:16px 40px;
-    background:#06b6d4;
+    padding:18px 45px;
+    background:linear-gradient(45deg,#06b6d4,#0ea5e9);
+    border:none;
+    border-radius:50px;
     color:white;
-    text-decoration:none;
-    border-radius:12px;
     font-size:20px;
-    transition:0.3s;
-    font-weight:600;
+    cursor:pointer;
+    text-decoration:none;
+    transition:0.4s;
+    box-shadow:0 0 25px rgba(14,165,233,0.5);
 }
 
 .btn:hover{
-    background:#0891b2;
-    transform:scale(1.05);
+    transform:scale(1.08);
+    box-shadow:0 0 45px rgba(14,165,233,0.9);
 }
 
-/* About */
+/* Section */
 
-.section{
-    padding:100px 8%;
+section{
+    padding:120px 8%;
 }
 
 .section-title{
     text-align:center;
-    font-size:50px;
-    margin-bottom:60px;
+    font-size:60px;
+    margin-bottom:70px;
     color:#38bdf8;
+    position:relative;
 }
+
+.section-title::after{
+    content:'';
+    width:120px;
+    height:5px;
+    background:#06b6d4;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:-15px;
+    border-radius:10px;
+}
+
+/* About */
 
 .about{
     display:grid;
     grid-template-columns:1fr 1fr;
-    gap:50px;
+    gap:60px;
     align-items:center;
 }
 
 .about img{
     width:100%;
-    border-radius:20px;
+    border-radius:25px;
+    transition:0.4s;
+}
+
+.about img:hover{
+    transform:scale(1.03);
 }
 
 .about-text{
-    font-size:20px;
-    line-height:1.9;
+    font-size:22px;
+    line-height:2;
     color:#cbd5e1;
 }
 
@@ -146,72 +219,134 @@ nav ul li a:hover{
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
 }
 
 .card{
-    background:#1e293b;
-    padding:40px 30px;
-    border-radius:20px;
-    transition:0.3s;
-    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:40px;
+    border-radius:25px;
+    transition:0.4s;
+    backdrop-filter:blur(10px);
 }
 
 .card:hover{
-    transform:translateY(-10px);
-    background:#334155;
+    transform:translateY(-15px);
+    background:rgba(255,255,255,0.1);
+    box-shadow:0 0 30px rgba(14,165,233,0.4);
 }
 
 .card h3{
-    font-size:28px;
+    font-size:30px;
     margin-bottom:20px;
     color:#22d3ee;
 }
 
 .card p{
     color:#cbd5e1;
-    line-height:1.7;
+    line-height:1.9;
+}
+
+/* Stats */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.stat-box{
+    background:#0f172a;
+    padding:50px;
+    border-radius:25px;
+    text-align:center;
+    transition:0.4s;
+}
+
+.stat-box:hover{
+    transform:scale(1.05);
+}
+
+.stat-box h2{
+    font-size:60px;
+    color:#38bdf8;
+}
+
+.stat-box p{
+    margin-top:15px;
+    font-size:22px;
+    color:#cbd5e1;
 }
 
 /* Placement */
 
 .placement{
-    background:#111827;
-    border-radius:25px;
-    padding:60px;
+    background:linear-gradient(135deg,#0f172a,#111827);
+    padding:70px;
+    border-radius:30px;
     text-align:center;
 }
 
 .placement h2{
-    font-size:45px;
-    margin-bottom:25px;
+    font-size:55px;
     color:#38bdf8;
+    margin-bottom:30px;
 }
 
 .placement p{
-    font-size:22px;
-    color:#e2e8f0;
+    font-size:24px;
+    line-height:2;
+    color:#cbd5e1;
+}
+
+/* Testimonials */
+
+.testimonials{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.testimonial{
+    background:#111827;
+    padding:35px;
+    border-radius:25px;
+    transition:0.4s;
+}
+
+.testimonial:hover{
+    transform:translateY(-10px);
+}
+
+.testimonial h3{
+    color:#38bdf8;
+    margin-bottom:20px;
+}
+
+.testimonial p{
     line-height:1.8;
+    color:#cbd5e1;
 }
 
 /* Contact */
 
-.contact-box{
-    background:#1e293b;
-    padding:50px;
-    border-radius:25px;
+.contact{
     text-align:center;
+    background:#0f172a;
+    padding:70px;
+    border-radius:30px;
 }
 
-.contact-box h2{
-    font-size:40px;
+.contact h2{
+    font-size:50px;
     margin-bottom:30px;
     color:#38bdf8;
 }
 
-.contact-box p{
-    font-size:22px;
+.contact p{
+    font-size:24px;
     margin-bottom:15px;
     color:#cbd5e1;
 }
@@ -219,17 +354,19 @@ nav ul li a:hover{
 /* Footer */
 
 footer{
-    background:#020617;
-    padding:30px;
+    padding:35px;
     text-align:center;
+    background:#01040b;
     color:#94a3b8;
-    margin-top:50px;
+    font-size:18px;
 }
 
-@media(max-width:900px){
+/* Responsive */
+
+@media(max-width:950px){
 
     .hero h1{
-        font-size:45px;
+        font-size:50px;
     }
 
     .hero p{
@@ -245,142 +382,242 @@ footer{
         gap:20px;
     }
 
+    nav ul{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
 }
 
 </style>
-
 </head>
 
 <body>
 
 <nav>
-    <div class="logo">Pathnex</div>
+    <div class="logo">PATHNEX</div>
 
     <ul>
         <li><a href="#">Home</a></li>
         <li><a href="#">Courses</a></li>
         <li><a href="#">Placements</a></li>
+        <li><a href="#">Success</a></li>
         <li><a href="#">Contact</a></li>
     </ul>
 </nav>
 
 <section class="hero">
 
-    <div class="hero-content">
+<div class="hero-content">
 
-        <h1>Pathnex DevOps Training & Placement Center</h1>
+<h1>Become a DevOps Engineer with Pathnex</h1>
 
-        <p>
-            Learn Real-Time DevOps Technologies with Industry Experts and
-            Get 100% Placement Assistance in Top IT Companies.
-            Located in Faridabad, Haryana.
-        </p>
+<p>
+Faridabad's Leading DevOps Training & Placement Institute.
+Learn Real-Time DevOps Tools with Industry Experts and Get Placement Support in Top IT Companies.
+</p>
 
-        <a href="#" class="btn">Start Your Career</a>
+<a href="#" class="btn">Start Your DevOps Journey</a>
 
-    </div>
-
-</section>
-
-<section class="section">
-
-    <h2 class="section-title">About Pathnex</h2>
-
-    <div class="about">
-
-        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop">
-
-        <div class="about-text">
-
-            Pathnex is a professional DevOps Training and Placement Institute
-            in Faridabad where students learn practical industry-level skills.
-
-            We provide real-time projects, interview preparation,
-            resume building, mock interviews, and placement support.
-
-            Our mission is to transform beginners into highly skilled
-            DevOps Engineers.
-
-        </div>
-
-    </div>
+</div>
 
 </section>
 
-<section class="section">
+<section>
 
-    <h2 class="section-title">Our Courses</h2>
+<h2 class="section-title">About Pathnex</h2>
 
-    <div class="cards">
+<div class="about">
 
-        <div class="card">
-            <h3>Linux</h3>
-            <p>Master Linux administration and shell scripting from beginner to advanced level.</p>
-        </div>
+<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop">
 
-        <div class="card">
-            <h3>AWS Cloud</h3>
-            <p>Learn EC2, VPC, IAM, S3, Load Balancer, Auto Scaling and complete cloud infrastructure.</p>
-        </div>
+<div class="about-text">
 
-        <div class="card">
-            <h3>Docker & Kubernetes</h3>
-            <p>Containerization and orchestration with real-time deployment projects.</p>
-        </div>
+Pathnex is a modern DevOps Training and Placement Center located in Faridabad, Haryana.
 
-        <div class="card">
-            <h3>CI/CD Pipeline</h3>
-            <p>Build complete automation pipelines using Jenkins, GitHub and Docker.</p>
-        </div>
+We provide industry-level practical training on Linux, AWS, Docker, Kubernetes, Jenkins, Terraform, Git, Monitoring Tools, and CI/CD Pipelines.
 
-        <div class="card">
-            <h3>Terraform</h3>
-            <p>Infrastructure as Code using Terraform with AWS cloud automation.</p>
-        </div>
+Students work on real-world projects and production-level environments to gain actual company experience.
 
-        <div class="card">
-            <h3>Monitoring</h3>
-            <p>Prometheus, Grafana and monitoring tools used in production environments.</p>
-        </div>
+We focus on:
+<br><br>
 
-    </div>
+✔ Real-Time Projects  
+✔ Mock Interviews  
+✔ Resume Preparation  
+✔ Placement Assistance  
+✔ Production Environment Practice  
+✔ Live Classes & Mentorship  
+
+</div>
+
+</div>
 
 </section>
 
-<section class="section">
+<section>
 
-    <div class="placement">
+<h2 class="section-title">Our DevOps Courses</h2>
 
-        <h2>Placement Assistance</h2>
+<div class="cards">
 
-        <p>
-            We help students prepare for interviews with mock sessions,
-            real DevOps projects, resume preparation and company referrals.
-            Our students are working in top IT companies as DevOps Engineers,
-            Cloud Engineers and Site Reliability Engineers.
-        </p>
+<div class="card">
+<h3>Linux Administration</h3>
+<p>Master Linux commands, shell scripting, permissions, processes and server management.</p>
+</div>
 
-    </div>
+<div class="card">
+<h3>AWS Cloud</h3>
+<p>Learn EC2, IAM, VPC, S3, Load Balancer, Auto Scaling and real cloud deployments.</p>
+</div>
+
+<div class="card">
+<h3>Docker</h3>
+<p>Containerize applications and deploy production-ready environments using Docker.</p>
+</div>
+
+<div class="card">
+<h3>Kubernetes</h3>
+<p>Master Pods, Deployments, Services, Ingress, Helm Charts and Kubernetes Architecture.</p>
+</div>
+
+<div class="card">
+<h3>Jenkins CI/CD</h3>
+<p>Build automated pipelines using Jenkins, GitHub Webhooks and Docker deployments.</p>
+</div>
+
+<div class="card">
+<h3>Terraform</h3>
+<p>Automate complete AWS infrastructure using Infrastructure as Code.</p>
+</div>
+
+<div class="card">
+<h3>Monitoring Tools</h3>
+<p>Prometheus, Grafana and monitoring production systems like real DevOps Engineers.</p>
+</div>
+
+<div class="card">
+<h3>Interview Preparation</h3>
+<p>Mock interviews, resume building and placement preparation sessions.</p>
+</div>
+
+</div>
 
 </section>
 
-<section class="section">
+<section>
 
-    <div class="contact-box">
+<h2 class="section-title">Our Achievements</h2>
 
-        <h2>Contact Us</h2>
+<div class="stats">
 
-        <p>📍 Pathnex Training Center, Faridabad, Haryana</p>
-        <p>📞 +91 XXXXX XXXXX</p>
-        <p>📧 support@pathnex.com</p>
+<div class="stat-box">
+<h2>1500+</h2>
+<p>Students Trained</p>
+</div>
 
-    </div>
+<div class="stat-box">
+<h2>500+</h2>
+<p>Placements Done</p>
+</div>
+
+<div class="stat-box">
+<h2>100+</h2>
+<p>Live Projects</p>
+</div>
+
+<div class="stat-box">
+<h2>50+</h2>
+<p>Hiring Partners</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="placement">
+
+<h2>100% Placement Assistance</h2>
+
+<p>
+At Pathnex, we not only teach DevOps technologies but also prepare students for real company environments.
+
+Students receive:
+<br><br>
+
+✔ Resume Building  
+✔ LinkedIn Optimization  
+✔ Mock Interviews  
+✔ HR Preparation  
+✔ Real Production Projects  
+✔ Company Referrals  
+
+Our students are working as:
+<br><br>
+
+DevOps Engineers  
+Cloud Engineers  
+SRE Engineers  
+AWS Engineers  
+Platform Engineers  
+
+</p>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Student Success Stories</h2>
+
+<div class="testimonials">
+
+<div class="testimonial">
+<h3>Rahul Sharma</h3>
+<p>
+"Pathnex completely changed my career. I learned DevOps from scratch and got placed in an MNC as a DevOps Engineer."
+</p>
+</div>
+
+<div class="testimonial">
+<h3>Ankit Verma</h3>
+<p>
+"The practical training and real projects helped me crack interviews easily. Highly recommended institute."
+</p>
+</div>
+
+<div class="testimonial">
+<h3>Priya Yadav</h3>
+<p>
+"Best DevOps institute in Faridabad. The CI/CD and Kubernetes training was amazing."
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="contact">
+
+<h2>Contact Pathnex</h2>
+
+<p>📍 Faridabad, Haryana, India</p>
+<p>📞 +91 XXXXX XXXXX</p>
+<p>📧 support@pathnex.com</p>
+<p>🌐 DevOps Training & Placement Center</p>
+
+</div>
 
 </section>
 
 <footer>
 
-    © 2026 Pathnex | DevOps Training & Placement Center
+© 2026 PATHNEX | DevOps Training & Placement Center | Faridabad
 
 </footer>
 
@@ -391,7 +628,7 @@ footer{
 
 @app.route('/')
 def home():
-    return render_template_string(HTML_PAGE)
+    return render_template_string(html)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
