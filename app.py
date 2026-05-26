@@ -7,10 +7,11 @@ html = """
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pathnex | DevOps Training & Placement Center</title>
+<title>PATHNEX - DevOps Training & Placement Institute</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
@@ -30,15 +31,100 @@ body{
     overflow-x:hidden;
 }
 
-/* Scrollbar */
+/* Animated Background */
 
-::-webkit-scrollbar{
-    width:10px;
+.bg-animation{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    overflow:hidden;
 }
 
-::-webkit-scrollbar-thumb{
-    background:#06b6d4;
-    border-radius:20px;
+.bg-animation span{
+    position:absolute;
+    display:block;
+    width:20px;
+    height:20px;
+    background:rgba(14,165,233,0.2);
+    animation:animate 25s linear infinite;
+    bottom:-150px;
+    border-radius:50%;
+}
+
+.bg-animation span:nth-child(1){
+    left:10%;
+    width:80px;
+    height:80px;
+    animation-delay:0s;
+}
+
+.bg-animation span:nth-child(2){
+    left:20%;
+    width:40px;
+    height:40px;
+    animation-delay:2s;
+    animation-duration:12s;
+}
+
+.bg-animation span:nth-child(3){
+    left:70%;
+    width:60px;
+    height:60px;
+    animation-delay:4s;
+}
+
+.bg-animation span:nth-child(4){
+    left:40%;
+    width:100px;
+    height:100px;
+    animation-delay:0s;
+    animation-duration:18s;
+}
+
+.bg-animation span:nth-child(5){
+    left:65%;
+    width:40px;
+    height:40px;
+    animation-delay:0s;
+}
+
+.bg-animation span:nth-child(6){
+    left:75%;
+    width:110px;
+    height:110px;
+    animation-delay:3s;
+}
+
+.bg-animation span:nth-child(7){
+    left:35%;
+    width:150px;
+    height:150px;
+    animation-delay:7s;
+}
+
+.bg-animation span:nth-child(8){
+    left:50%;
+    width:25px;
+    height:25px;
+    animation-delay:15s;
+    animation-duration:45s;
+}
+
+@keyframes animate{
+    0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+        border-radius:0;
+    }
+
+    100%{
+        transform:translateY(-1000px) rotate(720deg);
+        opacity:0;
+        border-radius:50%;
+    }
 }
 
 /* Navbar */
@@ -52,20 +138,21 @@ nav{
     position:fixed;
     top:0;
     z-index:1000;
-    background:rgba(2,6,23,0.85);
-    backdrop-filter:blur(10px);
+    background:rgba(2,6,23,0.7);
+    backdrop-filter:blur(15px);
 }
 
 .logo{
-    font-size:38px;
+    font-size:42px;
     font-weight:800;
     color:#38bdf8;
+    letter-spacing:3px;
 }
 
 nav ul{
     display:flex;
-    gap:35px;
     list-style:none;
+    gap:35px;
 }
 
 nav ul li a{
@@ -82,89 +169,69 @@ nav ul li a:hover{
 /* Hero Section */
 
 .hero{
-    height:100vh;
-    background:
-    linear-gradient(rgba(2,6,23,0.75),rgba(2,6,23,0.9)),
-    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop') center/cover;
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:40px;
+    padding:0 10%;
     position:relative;
 }
 
-.hero::before{
-    content:'';
-    position:absolute;
-    width:500px;
-    height:500px;
-    background:#06b6d4;
-    filter:blur(180px);
-    opacity:0.25;
-    animation:float 6s infinite ease-in-out;
-}
-
-@keyframes float{
-    0%{transform:translateY(0px);}
-    50%{transform:translateY(-30px);}
-    100%{transform:translateY(0px);}
-}
-
 .hero-content{
-    max-width:1000px;
-    z-index:10;
-}
-
-.hero h1{
-    font-size:85px;
-    font-weight:800;
-    line-height:1.2;
-    margin-bottom:25px;
-    background:linear-gradient(to right,#38bdf8,#22d3ee,#67e8f9);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    max-width:1100px;
     animation:fadeIn 2s ease;
 }
 
-.hero p{
-    font-size:25px;
-    line-height:1.8;
-    color:#cbd5e1;
-    margin-bottom:45px;
-    animation:fadeIn 3s ease;
+.hero h1{
+    font-size:90px;
+    line-height:1.2;
+    font-weight:800;
+    margin-bottom:30px;
+    background:linear-gradient(to right,#38bdf8,#67e8f9,#06b6d4);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(40px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0px);
-    }
+.hero p{
+    font-size:26px;
+    line-height:2;
+    color:#cbd5e1;
+    margin-bottom:50px;
 }
 
 .btn{
+    display:inline-block;
     padding:18px 45px;
-    background:linear-gradient(45deg,#06b6d4,#0ea5e9);
-    border:none;
-    border-radius:50px;
+    background:linear-gradient(45deg,#06b6d4,#3b82f6);
     color:white;
-    font-size:20px;
-    cursor:pointer;
+    border-radius:50px;
     text-decoration:none;
+    font-size:20px;
+    font-weight:600;
     transition:0.4s;
-    box-shadow:0 0 25px rgba(14,165,233,0.5);
+    box-shadow:0 0 30px rgba(59,130,246,0.5);
 }
 
 .btn:hover{
     transform:scale(1.08);
-    box-shadow:0 0 45px rgba(14,165,233,0.9);
+    box-shadow:0 0 60px rgba(59,130,246,0.9);
 }
 
-/* Section */
+/* Fade Animation */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Common Section */
 
 section{
     padding:120px 8%;
@@ -173,21 +240,21 @@ section{
 .section-title{
     text-align:center;
     font-size:60px;
-    margin-bottom:70px;
+    margin-bottom:80px;
     color:#38bdf8;
     position:relative;
 }
 
 .section-title::after{
     content:'';
+    position:absolute;
     width:120px;
     height:5px;
     background:#06b6d4;
-    position:absolute;
     left:50%;
     transform:translateX(-50%);
     bottom:-15px;
-    border-radius:10px;
+    border-radius:20px;
 }
 
 /* About */
@@ -202,7 +269,8 @@ section{
 .about img{
     width:100%;
     border-radius:25px;
-    transition:0.4s;
+    transition:0.5s;
+    box-shadow:0 0 40px rgba(14,165,233,0.3);
 }
 
 .about img:hover{
@@ -225,21 +293,21 @@ section{
 
 .card{
     background:rgba(255,255,255,0.05);
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.08);
     padding:40px;
     border-radius:25px;
-    transition:0.4s;
-    backdrop-filter:blur(10px);
+    backdrop-filter:blur(15px);
+    transition:0.5s;
 }
 
 .card:hover{
     transform:translateY(-15px);
-    background:rgba(255,255,255,0.1);
-    box-shadow:0 0 30px rgba(14,165,233,0.4);
+    box-shadow:0 0 40px rgba(14,165,233,0.4);
+    background:rgba(255,255,255,0.08);
 }
 
 .card h3{
-    font-size:30px;
+    font-size:32px;
     margin-bottom:20px;
     color:#22d3ee;
 }
@@ -254,45 +322,47 @@ section{
 .stats{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
+    gap:35px;
 }
 
 .stat-box{
     background:#0f172a;
     padding:50px;
-    border-radius:25px;
+    border-radius:30px;
     text-align:center;
-    transition:0.4s;
+    transition:0.5s;
 }
 
 .stat-box:hover{
-    transform:scale(1.05);
+    transform:scale(1.06);
+    box-shadow:0 0 35px rgba(14,165,233,0.4);
 }
 
 .stat-box h2{
-    font-size:60px;
+    font-size:65px;
     color:#38bdf8;
 }
 
 .stat-box p{
     margin-top:15px;
-    font-size:22px;
+    font-size:24px;
     color:#cbd5e1;
 }
 
 /* Placement */
 
 .placement{
-    background:linear-gradient(135deg,#0f172a,#111827);
-    padding:70px;
-    border-radius:30px;
+    background:linear-gradient(135deg,#111827,#0f172a);
+    padding:80px;
+    border-radius:35px;
     text-align:center;
+    box-shadow:0 0 40px rgba(14,165,233,0.15);
 }
 
 .placement h2{
-    font-size:55px;
+    font-size:60px;
+    margin-bottom:35px;
     color:#38bdf8;
-    margin-bottom:30px;
 }
 
 .placement p{
@@ -305,58 +375,78 @@ section{
 
 .testimonials{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:30px;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:35px;
 }
 
 .testimonial{
     background:#111827;
-    padding:35px;
+    padding:40px;
     border-radius:25px;
-    transition:0.4s;
+    transition:0.5s;
 }
 
 .testimonial:hover{
-    transform:translateY(-10px);
+    transform:translateY(-12px);
+    box-shadow:0 0 30px rgba(14,165,233,0.3);
 }
 
 .testimonial h3{
     color:#38bdf8;
     margin-bottom:20px;
+    font-size:28px;
 }
 
 .testimonial p{
-    line-height:1.8;
+    line-height:1.9;
     color:#cbd5e1;
+}
+
+/* Gallery */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:25px;
+    transition:0.5s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
 }
 
 /* Contact */
 
 .contact{
-    text-align:center;
     background:#0f172a;
-    padding:70px;
-    border-radius:30px;
+    padding:80px;
+    border-radius:35px;
+    text-align:center;
 }
 
 .contact h2{
-    font-size:50px;
-    margin-bottom:30px;
+    font-size:55px;
+    margin-bottom:35px;
     color:#38bdf8;
 }
 
 .contact p{
     font-size:24px;
-    margin-bottom:15px;
     color:#cbd5e1;
+    margin-bottom:18px;
 }
 
 /* Footer */
 
 footer{
+    background:#01040b;
     padding:35px;
     text-align:center;
-    background:#01040b;
     color:#94a3b8;
     font-size:18px;
 }
@@ -366,11 +456,11 @@ footer{
 @media(max-width:950px){
 
     .hero h1{
-        font-size:50px;
+        font-size:55px;
     }
 
     .hero p{
-        font-size:18px;
+        font-size:19px;
     }
 
     .about{
@@ -390,31 +480,51 @@ footer{
 }
 
 </style>
+
 </head>
 
 <body>
 
-<nav>
-    <div class="logo">PATHNEX</div>
+<div class="bg-animation">
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
 
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Courses</a></li>
-        <li><a href="#">Placements</a></li>
-        <li><a href="#">Success</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+<nav>
+
+<div class="logo">PATHNEX</div>
+
+<ul>
+<li><a href="#">Home</a></li>
+<li><a href="#">Courses</a></li>
+<li><a href="#">Placements</a></li>
+<li><a href="#">Success</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+
 </nav>
 
 <section class="hero">
 
 <div class="hero-content">
 
-<h1>Become a DevOps Engineer with Pathnex</h1>
+<h1>Build Your Career With Pathnex</h1>
 
 <p>
-Faridabad's Leading DevOps Training & Placement Institute.
-Learn Real-Time DevOps Tools with Industry Experts and Get Placement Support in Top IT Companies.
+
+Faridabad's Most Advanced DevOps Training & Placement Institute.
+
+Learn Linux, AWS, Docker, Kubernetes, Jenkins, Terraform, CI/CD, Monitoring and Real Production-Level DevOps Projects with Industry Experts.
+
+Get Placement Assistance & Crack Top MNC Interviews.
+
 </p>
 
 <a href="#" class="btn">Start Your DevOps Journey</a>
@@ -433,21 +543,23 @@ Learn Real-Time DevOps Tools with Industry Experts and Get Placement Support in 
 
 <div class="about-text">
 
-Pathnex is a modern DevOps Training and Placement Center located in Faridabad, Haryana.
+Pathnex is a professional DevOps Training & Placement Center located in Faridabad, Haryana.
 
-We provide industry-level practical training on Linux, AWS, Docker, Kubernetes, Jenkins, Terraform, Git, Monitoring Tools, and CI/CD Pipelines.
+We focus on practical DevOps learning with real-time industry projects.
 
-Students work on real-world projects and production-level environments to gain actual company experience.
+Students work on live CI/CD pipelines, Kubernetes deployments, AWS cloud infrastructure and monitoring tools exactly like production environments.
 
-We focus on:
+We prepare students for real company interviews with:
 <br><br>
 
-✔ Real-Time Projects  
 ✔ Mock Interviews  
-✔ Resume Preparation  
-✔ Placement Assistance  
-✔ Production Environment Practice  
-✔ Live Classes & Mentorship  
+✔ Resume Building  
+✔ LinkedIn Optimization  
+✔ Live Production Projects  
+✔ Company Referral Support  
+✔ One-to-One Mentorship  
+✔ Daily Practice Sessions  
+✔ Cloud Labs & Assignments  
 
 </div>
 
@@ -457,48 +569,48 @@ We focus on:
 
 <section>
 
-<h2 class="section-title">Our DevOps Courses</h2>
+<h2 class="section-title">Our Courses</h2>
 
 <div class="cards">
 
 <div class="card">
-<h3>Linux Administration</h3>
-<p>Master Linux commands, shell scripting, permissions, processes and server management.</p>
+<h3>Linux</h3>
+<p>Master Linux administration, permissions, scripting and production troubleshooting.</p>
 </div>
 
 <div class="card">
 <h3>AWS Cloud</h3>
-<p>Learn EC2, IAM, VPC, S3, Load Balancer, Auto Scaling and real cloud deployments.</p>
+<p>Learn complete AWS cloud infrastructure and deployment architecture.</p>
 </div>
 
 <div class="card">
 <h3>Docker</h3>
-<p>Containerize applications and deploy production-ready environments using Docker.</p>
+<p>Containerize applications and manage enterprise-level deployments.</p>
 </div>
 
 <div class="card">
 <h3>Kubernetes</h3>
-<p>Master Pods, Deployments, Services, Ingress, Helm Charts and Kubernetes Architecture.</p>
+<p>Master Pods, Deployments, Services, Ingress and Helm Charts.</p>
 </div>
 
 <div class="card">
-<h3>Jenkins CI/CD</h3>
-<p>Build automated pipelines using Jenkins, GitHub Webhooks and Docker deployments.</p>
+<h3>CI/CD Pipeline</h3>
+<p>Build complete Jenkins automation pipelines with GitHub & Docker.</p>
 </div>
 
 <div class="card">
 <h3>Terraform</h3>
-<p>Automate complete AWS infrastructure using Infrastructure as Code.</p>
+<p>Provision cloud infrastructure using Infrastructure as Code.</p>
 </div>
 
 <div class="card">
-<h3>Monitoring Tools</h3>
-<p>Prometheus, Grafana and monitoring production systems like real DevOps Engineers.</p>
+<h3>Monitoring</h3>
+<p>Prometheus, Grafana, ELK Stack and enterprise monitoring solutions.</p>
 </div>
 
 <div class="card">
-<h3>Interview Preparation</h3>
-<p>Mock interviews, resume building and placement preparation sessions.</p>
+<h3>Placement Preparation</h3>
+<p>Mock interviews, HR preparation and company interview guidance.</p>
 </div>
 
 </div>
@@ -542,17 +654,18 @@ We focus on:
 <h2>100% Placement Assistance</h2>
 
 <p>
-At Pathnex, we not only teach DevOps technologies but also prepare students for real company environments.
 
-Students receive:
+At Pathnex, we not only teach technologies but also transform students into professional DevOps Engineers.
+
+Students get:
 <br><br>
 
-✔ Resume Building  
-✔ LinkedIn Optimization  
-✔ Mock Interviews  
-✔ HR Preparation  
-✔ Real Production Projects  
+✔ Real Production Experience  
+✔ Resume Preparation  
+✔ Interview Sessions  
+✔ Cloud Projects  
 ✔ Company Referrals  
+✔ Placement Support  
 
 Our students are working as:
 <br><br>
@@ -560,8 +673,8 @@ Our students are working as:
 DevOps Engineers  
 Cloud Engineers  
 SRE Engineers  
-AWS Engineers  
 Platform Engineers  
+AWS Engineers  
 
 </p>
 
@@ -578,23 +691,39 @@ Platform Engineers
 <div class="testimonial">
 <h3>Rahul Sharma</h3>
 <p>
-"Pathnex completely changed my career. I learned DevOps from scratch and got placed in an MNC as a DevOps Engineer."
+"Pathnex changed my career completely. I learned DevOps practically and got placed in a top MNC."
 </p>
 </div>
 
 <div class="testimonial">
 <h3>Ankit Verma</h3>
 <p>
-"The practical training and real projects helped me crack interviews easily. Highly recommended institute."
+"Best DevOps institute in Faridabad. The real projects and CI/CD pipeline practice helped me crack interviews."
 </p>
 </div>
 
 <div class="testimonial">
 <h3>Priya Yadav</h3>
 <p>
-"Best DevOps institute in Faridabad. The CI/CD and Kubernetes training was amazing."
+"The Kubernetes and AWS training was amazing. Highly recommended for DevOps aspirants."
 </p>
 </div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Campus Gallery</h2>
+
+<div class="gallery">
+
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop">
 
 </div>
 
